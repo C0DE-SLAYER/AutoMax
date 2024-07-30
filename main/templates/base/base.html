@@ -1,0 +1,68 @@
+{% load static %}
+<doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    {% block 'title' %}
+    <title>Automax. List Your Car Today!</title>
+    {% endblock 'title' %}
+    <meta name="author" content="Faisal Ali">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    {% block 'bg_img' %}
+    {% endblock %}
+
+</head>
+
+<body >
+    {% if messages %}
+    {% for message in messages %}
+    <div {% if message.tags %}class="alert alert-{{ message.tags }}"{% endif %} > {{ message }} </div>
+    {% endfor %}
+    {% endif %}
+
+    {% block 'header' %}
+    <header class="p-3 bg-dark text-white w-100 nav-masthead">
+        <div class="container">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                <h3 class="float-md-start mb-0"><a href="{% url 'home' %}" class="text-white text-decoration-none">AutoMax</a></h3>
+                {% if request.user.is_authenticated %}
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 text-end ml-auto">
+                    <li class="p-2">
+                        <a href="{% url "home" %}" class="nav-link active">Home</a>
+                    </li>
+                    <li class="p-2">
+                        <a href="{% url "profile" %}" class="nav-link active">Profile</a>
+                    </li>
+                    <li class="p-2">
+                        <a href="{% url "logout" %}" class="nav-link active">Logout</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    {% endblock %}
+
+
+    {% block 'body' %}
+    {% endblock %}
+</body>
+
+
+{% block 'footer' %}
+<footer class="footer text-muted bg-dark py-5">
+    <div class="container">
+        <p class="mb-1">AutoMax - Best Place To Buy & Sell Cars</p>
+        <p class="mb-0">© Copyright {% now 'Y' %} <a href="https://github.com/C0DE-SLAYER/AutoMax">C0DE-SLAYER</a></p>
+    </div>
+</footer>
+{% endblock %}
+
+</html>
