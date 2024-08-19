@@ -15,13 +15,15 @@ cd AutoMax
 
 pip install -r requirement.txt
 
-# Change DEBUG in automax.setting file to True in local 
-# Change the .env.example file to .env and fill the field accordingly
+# Change the .env.example file to .env and fill the field accordingly. If using the s3 bucket uncomment the storages section in settings.py file and fill the field accordingly
 
 python manage.py migrate # Database migrations
 python manage.py createsuperuser # Create a superuser (Optional)
 python manage.py runserver # Head to 127.0.0.1:8000 to view the website
 ```
+
+## For deployment instructions
+- please visit the [deployment branch](https://github.com/C0DE-SLAYER/AutoMax/tree/deployment).
 
 ## Demo
 
