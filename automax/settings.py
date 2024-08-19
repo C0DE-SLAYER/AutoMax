@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [".vercel.app", ".now.sh", "127.0.0.1", "localhost"]
 
@@ -87,15 +87,16 @@ WSGI_APPLICATION = "automax.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-if DEBUG:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
-else:
-    DATABASES = {
+}
+
+''' # uncomment to use postgres database
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': env('POSTGRES_DATABASE'),
@@ -105,7 +106,7 @@ else:
         'PORT': env('POSTGRES_PORT'),
     }
 }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -150,8 +151,7 @@ MESSAGE_TAGS = {
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS = os.path.join(BASE_DIR, 'static'),
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # media path (uploaded files)
 
@@ -166,3 +166,34 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Setting for s3 bucket to store media and static files
+''' # uncomment to use s3 for storing static and media file
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            'access_key' : env('AWS_ACCESS_KEY'),
+            'secret_key' : env('AWS_SECRET_KEY'),
+            'bucket_name' : env('AWS_BUCKET_NAME'),
+            'endpoint_url': env('AWS_ENDPOINT_URL'),
+            'region_name': env('AWS_REGION_NAME'),
+            'location': 'media',
+            'default_acl': 'public-read',
+            'custom_domain': env('AWS_CUSTOM_DOMAIN'),
+        },
+    },
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            'access_key' : env('AWS_ACCESS_KEY'),
+            'secret_key' : env('AWS_SECRET_KEY'),
+            'bucket_name' : env('AWS_BUCKET_NAME'),
+            'endpoint_url': env('AWS_ENDPOINT_URL'),
+            'region_name': env('AWS_REGION_NAME'),
+            'location': 'static',
+            'custom_domain': env('AWS_CUSTOM_DOMAIN'),
+            'default_acl': 'public-read',
+        },
+    },
+}'''
