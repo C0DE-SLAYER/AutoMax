@@ -28,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     "django_filters",
+    "storages",
     "main",
     "users",
 ]
@@ -99,11 +100,11 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('POSTGRES_DATABASE'),
-        'USER': env('POSTGRES_USER'),
-        'PASSWORD': env('POSTGRES_PASSWORD'),
-        'HOST': env('POSTGRES_HOST'),
-        'PORT': env('POSTGRES_PORT'),
+        'NAME': env('DB_POSTGRES_DATABASE'),
+        'USER': env('DB_POSTGRES_USER'),
+        'PASSWORD': env('DB_POSTGRES_PASSWORD'),
+        'HOST': env('DB_POSTGRES_HOST'),
+        'PORT': env('DB_POSTGRES_PORT'),
     }
 }
 '''
@@ -173,26 +174,26 @@ STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            'access_key' : env('AWS_ACCESS_KEY'),
-            'secret_key' : env('AWS_SECRET_KEY'),
-            'bucket_name' : env('AWS_BUCKET_NAME'),
-            'endpoint_url': env('AWS_ENDPOINT_URL'),
-            'region_name': env('AWS_REGION_NAME'),
+            'access_key' : env('AWS_S3_ACCESS_KEY'),
+            'secret_key' : env('AWS_S3_SECRET_KEY'),
+            'bucket_name' : env('AWS_S3_BUCKET_NAME'),
+            'endpoint_url': env('AWS_S3_ENDPOINT_URL'),
+            'region_name': env('AWS_S3_REGION_NAME'),
+            'custom_domain': env('AWS_S3_CUSTOM_DOMAIN'),
             'location': 'media',
             'default_acl': 'public-read',
-            'custom_domain': env('AWS_CUSTOM_DOMAIN'),
         },
     },
     "staticfiles": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
-            'access_key' : env('AWS_ACCESS_KEY'),
-            'secret_key' : env('AWS_SECRET_KEY'),
-            'bucket_name' : env('AWS_BUCKET_NAME'),
-            'endpoint_url': env('AWS_ENDPOINT_URL'),
-            'region_name': env('AWS_REGION_NAME'),
+            'access_key' : env('AWS_S3_ACCESS_KEY'),
+            'secret_key' : env('AWS_S3_SECRET_KEY'),
+            'bucket_name' : env('AWS_S3_BUCKET_NAME'),
+            'endpoint_url': env('AWS_S3_ENDPOINT_URL'),
+            'region_name': env('AWS_S3_REGION_NAME'),
+            'custom_domain': env('AWS_S3_CUSTOM_DOMAIN'),
             'location': 'static',
-            'custom_domain': env('AWS_CUSTOM_DOMAIN'),
             'default_acl': 'public-read',
         },
     },
