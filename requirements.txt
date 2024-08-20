@@ -8,4 +8,5 @@ gunicorn
 pillow
 psycopg2-binary
 django-storages
-django-storages[s3]
+boto3
+botocore

@@ -23,7 +23,7 @@ python manage.py runserver # Head to 127.0.0.1:8000 to view the website
 ```
 
 ## For deployment instructions
-- please visit the [deployment branch](https://github.com/C0DE-SLAYER/AutoMax/tree/deployment).
+- please visit the [deployment branch](https://github.com/C0DE-SLAYER/AutoMax/tree/deploy).
 
 ## Demo
 
