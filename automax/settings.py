@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [".vercel.app", ".now.sh", "127.0.0.1", "localhost"]
 
@@ -89,14 +89,14 @@ WSGI_APPLICATION = "automax.wsgi.application"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 
-DATABASES = {
+'''DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
-}
+}'''
 
-''' # uncomment to use postgres database
+# uncomment to use postgres database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -107,7 +107,7 @@ DATABASES = {
         'PORT': env('DB_POSTGRES_PORT'),
     }
 }
-'''
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -169,7 +169,6 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Setting for s3 bucket to store media and static files
-''' # uncomment to use s3 for storing static and media file
 STORAGES = {
     "default": {
         "BACKEND": "storages.backends.s3.S3Storage",
@@ -197,4 +196,4 @@ STORAGES = {
             'default_acl': 'public-read',
         },
     },
-}'''
+}

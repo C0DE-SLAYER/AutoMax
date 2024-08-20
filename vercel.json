@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "automax/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.12",
+        "buildCommand": "python3.12 -m pip install -r requirements.txt && python3.12 manage.py migrate && python3.12 manage.py collectstatic --noinput --clear"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "automax/wsgi.py"
+    }
+  ]
+}
